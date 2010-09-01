@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://zikula.org/servicemanager/1.0/"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://zikula.org/servicemanager/1.0/ Xml/schema.xsd">
+              
+    <object id="debug.toolbar.panel.rendertime" class="Zikula_DebugToolbar_Panel_RenderTime" />
+</services>

@@ -237,20 +237,23 @@ class Zikula_ServiceManager implements ArrayAccess
     protected function compileArgs($args)
     {
         $compiledArgs = array();
-        foreach ($args as $arg) {
+        foreach ($args as $key => $arg) {
             switch (true)
             {
+                case (is_array($arg)):
+                    $compiledArgs[$key] = $this->compileArgs($arg);
+                    break;
                 case (!is_object($arg)):
-                    $compiledArgs[] = $arg;
+                    $compiledArgs[$key] = $arg;
                     break;
                 case ($arg instanceof Zikula_ServiceManager_Definition):
-                    $compiledArgs[] = $this->createService($arg);
+                    $compiledArgs[$key] = $this->createService($arg);
                     break;
                 case ($arg instanceof Zikula_ServiceManager_Service):
-                    $compiledArgs[] = $this->getService($arg->getId());
+                    $compiledArgs[$key] = $this->getService($arg->getId());
                     break;
                 case ($arg instanceof Zikula_ServiceManager_Argument):
-                    $compiledArgs[] = $this->getArgument($arg->getId());
+                    $compiledArgs[$key] = $this->getArgument($arg->getId());
                     break;
                 default:
                     throw new InvalidArgumentException(sprintf('Invalid argument object %s', get_class($arg)));

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://zikula.org/servicemanager/1.0/"
+          xmlns:module="http://zikula.org/module/1.0/"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://zikula.org/servicemanager/1.0/ Xml/schema.xsd
+                              http://zikula.org/module/1.0/ Xml/module.xsd">
+
+    <object id="debug.toolbar" class="Zikula_DebugToolbar">
+        <call name="addPanels">
+            <object class="Zikula_DebugToolbar_Panel_Version" />
+            <ref id="debug.toolbar.panel.rendertime" />
+            <object class="Zikula_DebugToolbar_Panel_Memory">
+                <property name="testvar">
+<!--                    <list>
+                        <value>test value</value>
+                        <value>abc 123</value>
+                    </list>-->
+<!--                    <map>
+                        <entry key="key1" value="test value" />
+                        <entry key="key2" ref="debug.toolbar.panel.rendertime" />
+                    </map>-->
+                    <module:api module="Users" type="user" />
+                </property>
+            </object>
+        </call>
+    </object>
+
+    <import file="example_1.xml" />
+</services>

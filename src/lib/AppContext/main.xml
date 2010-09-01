@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://zikula.org/servicemanager/1.0/"
+          xmlns:evt="http://zikula.org/event/1.0/"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://zikula.org/servicemanager/1.0/ ../Zikula/ServiceManager/Loader/Xml/schema.xsd 
+                              http://zikula.org/event/1.0/ ../Zikula/ServiceManager/Loader/Xml/event.xsd">
+
+    <object id="zikula" class="Zikula_Core">
+        <property name="serviceManager" ref="zikula.servicemanager" />
+        <property name="eventManager" ref="zikula.eventmanager" />
+    </object>
+
+    <object id="zikula.eventmanager" class="Zikula_EventManager">
+        <construct>
+            <ref id="zikula.servicemanager" />
+        </construct>
+    </object>
+    <evt:manager ref="zikula.eventmanager" />
+
+    <!-- core event handler -->
+    <evt:attach name="setup.errorreporting" class="SystemListenersUtil" method="defaultErrorReporting" />
+    <evt:attach name="core.init" class="SystemListenersUtil" method="setupLoggers" />
+    <evt:attach name="log" class="SystemListenersUtil" method="errorLog" />
+    <evt:attach name="core.init" class="SystemListenersUtil" method="sessionLogging" />
+    <evt:attach name="core.init" class="SystemListenersUtil" method="systemPlugins" />
+    <evt:attach name="core.postinit" class="SystemListenersUtil" method="systemHooks" />
+    <evt:attach name="log.sql" class="SystemListenersUtil" method="logSqlQueries" />
+    <evt:attach name="core.init" class="SystemListenersUtil" method="setupAutoloaderForGeneratedCategoryModels" />
+    <evt:attach name="module.postcallhooks.extrainfo" class="SystemListenersUtil" method="deleteGeneratedCategoryModelsOnModuleRemove" />
+    <evt:attach name="pageutil.addvar_filter" class="SystemListenersUtil" method="coreStylesheetOverride" />
+
+    <import file="debugtoolbar.xml" />
+</services>

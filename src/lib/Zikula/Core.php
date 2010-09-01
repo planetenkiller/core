@@ -116,6 +116,18 @@ class Zikula_Core
     }
 
     /**
+     * Setter for servicemanager property.
+     *
+     * @param Zikula_ServiceManager $seriveManager ServiceManager instance.
+     *
+     * @return void
+     */
+    public function setServiceManager(Zikula_ServiceManager $seriveManager)
+    {
+        $this->serviceManager = $seriveManager;
+    }
+
+    /**
      * Getter for eventmanager property.
      *
      * @return Zikula_Eventmanager
@@ -123,6 +135,18 @@ class Zikula_Core
     public function getEventManager()
     {
         return $this->eventManager;
+    }
+
+    /**
+     * Setter for eventmanager property.
+     *
+     * @param Zikula_Eventmanager $eventmanager EventManager instance.
+     *
+     * @return void
+     */
+    public function setEventManager(Zikula_Eventmanager $eventmanager)
+    {
+        $this->eventManager = $eventmanager;
     }
 
     /**

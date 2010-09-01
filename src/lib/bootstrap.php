@@ -15,10 +15,15 @@
 include 'lib/ZLoader.php';
 ZLoader::register();
 
-$core = new Zikula_Core();
+// setup service manager
+$appContextLoader = new Zikula_ServiceManager_Loader_XmlLoader();
+$serviceManager = new Zikula_ServiceManager('zikula.servicemanager');
+$appContextLoader->load('lib/AppContext/main.xml', $serviceManager);
+
+// boot core
+$core = $serviceManager->getService('zikula');
 $core->boot();
 $eventManager = $core->getEventManager();
-$serviceManager = $core->getServiceManager();
 
 // load eventhandlers from config/EventHandlers directory if any.
 EventUtil::attachCustomHandlers('config/EventHandlers');

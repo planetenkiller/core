@@ -18,6 +18,16 @@
  */
 class Zikula_DebugToolbar_Panel_Memory implements Zikula_DebugToolbar_Panel
 {
+    private $testvar;
+
+    public function setTestvar($testvar)
+    {
+        $this->testvar = $testvar;
+
+        echo 'user2:';
+        print_r($testvar->get(array('uid' => 2)));
+    }
+
     /**
      * Returns the id of this panel.
      *

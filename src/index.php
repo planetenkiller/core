@@ -15,6 +15,21 @@
 include 'lib/bootstrap.php';
 $core->init();
 
+$xmlloader = new Zikula_ServiceManager_Loader_XmlLoader();
+$xmlloader->registerNamespaceHandler(Zikula_ServiceManager_Loader_Xml_ZikulaServicemanagerNamespaceHandler::XML_NAMESPACE,
+                                     new Zikula_ServiceManager_Loader_Xml_ZikulaServicemanagerNamespaceHandler());
+$xmlloader->registerNamespaceHandler(Zikula_ServiceManager_Loader_Xml_ModuleNamespaceHandler::XML_NAMESPACE,
+                                     new Zikula_ServiceManager_Loader_Xml_ModuleNamespaceHandler());
+
+$sm = new Zikula_ServiceManager();
+$xmlloader->load("lib/Zikula/ServiceManager/Loader/example.xml", $sm);
+
+var_dump($sm);
+
+var_dump($sm->getService('debug.toolbar'));
+exit;
+
+
 if (SessionUtil::hasExpired()) {
     // Session has expired, display warning
     header('HTTP/1.0 403 Access Denied');

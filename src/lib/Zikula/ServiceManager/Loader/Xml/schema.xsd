@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://zikula.org/servicemanager/1.0/"
+    xmlns:tns="http://zikula.org/servicemanager/1.0/"
+    elementFormDefault="qualified">
+    <xsd:element name="services">
+        <xsd:complexType>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:element ref="tns:object"/>
+                <xsd:element ref="tns:import"/>
+                <xsd:any processContents="strict" namespace="##other"/>
+            </xsd:choice>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="object">
+        <xsd:complexType>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:element ref="tns:property"/>
+                <xsd:element ref="tns:call"/>
+                <xsd:element ref="tns:construct"/>
+            </xsd:choice>
+            <xsd:attribute name="id" type="xsd:string"/>
+            <xsd:attribute name="class" type="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="property">
+        <xsd:complexType>
+            <xsd:choice minOccurs="0">
+                <xsd:element ref="tns:object"/>
+                <xsd:element ref="tns:ref"/>
+                <xsd:element ref="tns:map"/>
+                <xsd:element ref="tns:list"/>
+                <xsd:any namespace="##other" processContents="strict"/>
+                <xsd:element ref="tns:value"/>
+            </xsd:choice>
+            <xsd:attribute name="ref" type="xsd:string"/>
+            <xsd:attribute name="value" type="xsd:string"/>
+            <xsd:attribute name="name" type="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ref">
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="map">
+        <xsd:complexType>
+            <xsd:choice maxOccurs="unbounded" minOccurs="0">
+                <xsd:element name="entry">
+                    <xsd:complexType>
+                        <xsd:choice minOccurs="0">
+                            <xsd:element ref="tns:object"/>
+                            <xsd:element ref="tns:ref"/>
+                            <xsd:element ref="tns:map"/>
+                            <xsd:element ref="tns:list"/>
+                            <xsd:any processContents="strict" namespace="##other"/>
+                            <xsd:element ref="tns:value"/>
+                        </xsd:choice>
+                        <xsd:attribute name="key" type="xsd:string" use="required"/>
+                        <xsd:attribute name="ref" type="xsd:string"/>
+                        <xsd:attribute name="value" type="xsd:string"/>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:choice>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="list">
+        <xsd:complexType>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:element ref="tns:object"/>
+                <xsd:element ref="tns:ref"/>
+                <xsd:element ref="tns:map"/>
+                <xsd:element ref="tns:list"/>
+                <xsd:any namespace="##other" processContents="strict"/>
+                <xsd:element ref="tns:value"/>
+            </xsd:choice>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="call">
+        <xsd:complexType>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:element ref="tns:object"/>
+                <xsd:element ref="tns:ref"/>
+                <xsd:element ref="tns:map"/>
+                <xsd:element ref="tns:list"/>
+                <xsd:any processContents="strict" namespace="##other"/>
+                <xsd:element ref="tns:value"/>
+            </xsd:choice>
+            <xsd:attribute name="name" type="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="construct">
+        <xsd:complexType>
+            <xsd:choice minOccurs="1" maxOccurs="unbounded">
+                <xsd:element ref="tns:object"/>
+                <xsd:element ref="tns:ref"/>
+                <xsd:element ref="tns:map"/>
+                <xsd:element ref="tns:list"/>
+                <xsd:any processContents="strict" namespace="##other"/>
+                <xsd:element ref="tns:value"/>
+            </xsd:choice>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="import">
+        <xsd:complexType>
+            <xsd:attribute name="file" type="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="value" type="xsd:string"></xsd:element>
+</xsd:schema>
