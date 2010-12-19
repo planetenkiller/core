@@ -88,7 +88,7 @@ class Zikula_ServiceManager_Loader_XmlLoader implements Zikula_ServiceManager_Lo
         }
     }
 
-    public function registerNamespaceHandler($namespace, Zikula_ServiceManager_Loader_NamespaceHandler $handler)
+    public function registerNamespaceHandler($namespace, Zikula_ServiceManager_Loader_Xml_NamespaceHandler $handler)
     {
         $this->namespaceHandler[$namespace] = $handler;
     }

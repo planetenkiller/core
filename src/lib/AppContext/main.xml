@@ -29,5 +29,5 @@
     <evt:attach name="module.postcallhooks.extrainfo" class="SystemListenersUtil" method="deleteGeneratedCategoryModelsOnModuleRemove" />
     <evt:attach name="pageutil.addvar_filter" class="SystemListenersUtil" method="coreStylesheetOverride" />
 
-    <import file="debugtoolbar.xml" />
+<!--    <import file="debugtoolbar.xml" />-->
 </services>
